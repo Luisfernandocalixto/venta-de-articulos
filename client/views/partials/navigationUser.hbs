@@ -1,0 +1,61 @@
+<!-- navbar -->
+<nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+  <div class="uk-position-relative">
+    <img
+      style="width: 100vw; object-fit: cover; height: 100px;"
+      src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dGllbmRhfGVufDB8fDB8fHww"
+      width=""
+      height=""
+      alt=""
+    />
+    <div class="uk-position-top">
+      <nav class="uk-navbar-container uk-navbar-transparent">
+        <div class="uk-container">
+          <div uk-navbar>
+
+            <div class="uk-navbar-left">
+              <ul class="uk-navbar-nav">
+                <li class="uk-active"><a href="#" class="uk-text-emphasis">
+                    <span uk-icon="icon: cart"></span>
+                  </a></li>
+                <li><a href="/articles" class="uk-text-emphasis">Inicio</a></li>
+                <li>
+                  <a href="#" class="uk-text-emphasis">Cuenta</a>
+                  <div class="uk-navbar-dropdown">
+                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                      <li class="uk-active"><p>{{present}}</p></li>
+                      <li><a href="/article">Mis artículos</a></li>
+                      <li class="">
+                        Modo
+                        <span class="main">
+                          <figure class="main__light"></figure>
+                          <figure class="main__dark"></figure>
+
+                          <div class="main__switcher">
+                            <input
+                              type="checkbox"
+                              name=""
+                              id=""
+                              class="main__check"
+                            />
+                            <div class="main__option"></div>
+                          </div>
+                        </span>
+                      </li>
+                      <li><a href="/users/account">Mi cuenta</a></li>
+                      <li class="uk-nav-divider"></li>
+                      <li><a href="/users/logout">Salir</a></li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</nav>
+
+<!-- navbar -->

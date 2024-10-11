@@ -1,0 +1,58 @@
+<div
+  class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin"
+  uk-grid
+>
+  <div class="uk-card-media-left uk-cover-container">
+    <img
+      src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dGllbmRhfGVufDB8fDB8fHww"
+      alt=""
+      uk-cover
+    />
+    <canvas width="600" height="400"></canvas>
+  </div>
+  <div>
+    <div class="uk-card-body">
+      <h3 class="uk-card-title">Electronicos</h3>
+      <p>Compra y vende fácilmente artículos.</p>
+    </div>
+  </div>
+</div>
+
+<div
+  class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin"
+  uk-grid
+>
+  <div class="uk-flex-last@s uk-card-media-right uk-cover-container">
+    <img
+      src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dGllbmRhfGVufDB8fDB8fHww"
+      alt=""
+      uk-cover
+    />
+    <canvas width="600" height="400"></canvas>
+  </div>
+  <div>
+    <div class="uk-card-body">
+      <h3 class="uk-card-title">Ropa</h3>
+      <p>Compra y vende fácilmente artículos .</p>
+    </div>
+  </div>
+</div>
+<article class="section">
+  {{#each articles}}
+    <div
+      class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin"
+      uk-grid
+    >
+      <div class="uk-cover-container">
+        <img src="/uploads/{{imageUrl}}" alt="" uk-cover />
+        <canvas width="600" height="400"></canvas>
+      </div>
+      <div>
+        <div class="uk-card-body">
+          <h3 class="uk-card-title">Venta</h3>
+          <p>{{description}}.</p>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</article>

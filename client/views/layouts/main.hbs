@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta property="og:type" content="website">
+    <meta property="og:title" content="Punto de ventas">
+    <meta property="og:image" content="/img/article.svg">
+    <meta property="og:description" content="Compra y vende fácilmente artículos">
+    <title>Punto de ventas</title>
+    <link rel="shortcut icon" href="/img/article.svg" type="image/x-icon">
+    <link rel="stylesheet" href="/css/uikit-rtl.css">
+    <link rel="stylesheet" href="/css/uikit.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/uikit.js"></script>
+
+</head>
+
+<body>
+{{#if present}}
+{{>navigationUser}}
+{{else}}
+    {{>navigation}}
+{{/if}}
+    {{{body}}}
+
+
+
+    <!-- <script> -->
+    <script src="/js/uikit-icons.min.js"></script>
+    <script src="/js/uikit.min.js"></script>
+    <script type="module" src="/js/app.js"></script>
+    <script type="" src="/js/jquery.js"></script>
+    <!-- </script> -->
+</body>
+
+</html>

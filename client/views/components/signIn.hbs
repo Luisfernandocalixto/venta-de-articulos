@@ -1,0 +1,148 @@
+<!-- signIn -->
+<form
+  id="signInForm"
+  action="/users/signIn"
+  method="post"
+  style="display: grid; place-content: center; height: 40vh; margin-top: 40px;"
+>
+  <legend class="uk-legend uk-text-center">Iniciar sesión</legend>
+
+  <div class="uk-margin">
+    <div class="uk-inline">
+      <span class="uk-form-icon" uk-icon="icon: mail"></span>
+      <input
+        class="uk-input"
+        type="text"
+        aria-label="Not clickable icon"
+        placeholder="Email"
+        name="email"
+        required
+        autofocus
+        autocomplete="none"
+        id="inputEmail"
+        onchange=""
+      />
+    </div>
+  </div>
+
+  <div class="uk-margin">
+    <div class="uk-inline">
+      <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+      <input
+        class="uk-input"
+        type="text"
+        aria-label="Not clickable icon"
+        placeholder="Contraseña"
+        autocomplete="none"
+        required
+        name="password"
+        id="inputPassword"
+      />
+    </div>
+  </div>
+
+  <button
+    class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
+    id="signInButton"
+  >Ingresar</button>
+
+  <hr align="center" />
+  <div style="display: flex; justify-content: center; gap: 20px;">
+    <p>
+      Aun no tienes cuenta?
+    </p>
+    <a href="/users/signUp">Crear cuenta</a>
+  </div>
+  <hr align="center" />
+</form>
+<!-- signIn -->
+
+<br />
+
+{{!-- password --}}
+<div align="center" style="margin: 0 auto; gap: 20px;">
+  <p>Olvidaste tu contraseña?</p>
+  <p class="uk-button uk-button-text" id="btnRecover" style="color: inherit;">✅ Recuperar cuenta</p>
+</div>
+<form
+  id="receivedAccount"
+  action="/users/forgot-password"
+  method="post"
+  style="display: none; place-content: center; height: 40vh; margin-top: 40px;"
+>
+
+<div style="display: flex; justify-content: center;">
+  <legend class="uk-legend uk-text-center">Confirma email </legend>
+      <span id="closeForm" uk-icon="icon: close" style="cursor: pointer;"></span>
+
+</div>
+  <div class="uk-margin">
+    <div class="uk-inline">
+      <span class="uk-form-icon" uk-icon="icon: mail"></span>
+      <input
+        class="uk-input"
+        type="text"
+        aria-label="Not clickable icon"
+        placeholder="Email"
+        autocomplete="none"
+        name="email"
+        id="inputEmail"
+        
+        autofocus
+      />
+    </div>
+  </div>
+
+
+  <button
+    class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
+  >Button</button>
+</form>
+
+{{!-- password --}}
+
+<button
+  hidden
+  id="alert"
+  class="uk-button uk-button-default demo"
+  type="button"
+  onclick="UIkit.notification({message: '{{message}}…', status: 'danger'})"
+>With icon</button>
+{{#if message}}
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+    let element = document.querySelector('#alert').onclick(true);
+    })
+  </script>
+{{/if}}
+
+{{#if success_msg}}
+  <button
+    hidden
+    id="alertS"
+    class="uk-button uk-button-default demo"
+    type="button"
+    onclick="UIkit.notification({message: '{{success_msg}}…', status: 'success'})"
+  >With icon</button>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+    let element = document.querySelector('#alertS').onclick(true);
+    })
+  </script>
+{{/if}}
+{{#if error_msg}}
+  <button
+    hidden
+    id="alertE"
+    class="uk-button uk-button-default demo"
+    type="button"
+    onclick="UIkit.notification({message: '{{error_msg}}…', status: 'danger'})"
+  >With icon</button>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+    let element = document.querySelector('#alertE').onclick(true);
+    })
+  </script>
+{{/if}}
+
+<script type="module" src="/js/signIn.js"></script>
