@@ -160,7 +160,7 @@ router.post('/users/forgot-password', async (req, res) => {
             to: [`${user.email}`],
             subject: "Password Reset Request",
             html: `<strong>Please click on the following link to reset your password:</strong>
-            http://localhost:8000/users/reset-password/${token}
+            ${URL}/users/reset-password/${token}
             `
 
         })
@@ -270,7 +270,7 @@ router.post('/users/uploadImage', isAuthenticated, upload.single('image'), async
 
 
 
-router.get('/users/logout', isAuthenticated, async (req, res, next) => {
+router.get('/users/logout', async (req, res, next) => {
     req.logOut(function (err) {
         if (err) { return next(err) }
         res.redirect('/')
