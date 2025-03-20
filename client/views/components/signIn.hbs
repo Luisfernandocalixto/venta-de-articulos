@@ -3,7 +3,8 @@
   id="signInForm"
   action="/users/signIn"
   method="post"
-  style="display: grid; place-content: center; height: 40vh; margin-top: 40px;"
+  class="formSignIn"
+  style=""
 >
   <legend class="uk-legend uk-text-center">Iniciar sesión</legend>
 
@@ -12,31 +13,30 @@
       <span class="uk-form-icon" uk-icon="icon: mail"></span>
       <input
         class="uk-input"
-        type="text"
+        type="email"
         aria-label="Not clickable icon"
-        placeholder="Email"
+        placeholder="example@gmail.com"
         name="email"
-        required
         autofocus
-        autocomplete="none"
+        autocomplete="off"
         id="inputEmail"
-        onchange=""
+        required
       />
     </div>
   </div>
 
   <div class="uk-margin">
     <div class="uk-inline">
-      <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+      <a class="uk-form-icon uk-form-icon-flip cursor-pointer" uk-icon="icon: lock"></a>
       <input
         class="uk-input"
-        type="text"
+        type="password"
         aria-label="Not clickable icon"
-        placeholder="Contraseña"
-        autocomplete="none"
-        required
+        placeholder="******"
+        autocomplete="off"
         name="password"
         id="inputPassword"
+        required
       />
     </div>
   </div>
@@ -44,10 +44,11 @@
   <button
     class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
     id="signInButton"
+    type="submit"
   >Ingresar</button>
 
   <hr align="center" />
-  <div style="display: flex; justify-content: center; gap: 20px;">
+  <div  class="uk-flex uk-flex-center gap-20 ">
     <p>
       Aun no tienes cuenta?
     </p>
@@ -60,89 +61,52 @@
 <br />
 
 {{!-- password --}}
-<div align="center" style="margin: 0 auto; gap: 20px;">
+<div align="center" style="" class="gap-20 uk-margin-auto">
   <p>Olvidaste tu contraseña?</p>
-  <p class="uk-button uk-button-text" id="btnRecover" style="color: inherit;">✅ Recuperar cuenta</p>
+  <button class="uk-button uk-button-text color-inherit uk-button uk-button-default uk-margin-small-right" id="btnRecover" style=""  type="button" uk-toggle="target: #modal-example">✅ Recuperar cuenta</button>
 </div>
+
+<!-- This is the modal -->
+<div id="modal-example" class="" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body bg-dull">
+        <h2 class="uk-modal-title uk-text-center">Ingrese su email para recuperar su contraseña</h2>
 <form
   id="receivedAccount"
   action="/users/forgot-password"
   method="post"
-  style="display: none; place-content: center; height: 40vh; margin-top: 40px;"
+  style=""
+
 >
 
-<div style="display: flex; justify-content: center;">
-  <legend class="uk-legend uk-text-center">Confirma email </legend>
-      <span id="closeForm" uk-icon="icon: close" style="cursor: pointer;"></span>
+<div style="" class="uk-flex uk-flex-center">
 
 </div>
-  <div class="uk-margin">
-    <div class="uk-inline">
+  <div class="uk-margin flex uk-flex-center">
+    <div class="uk-inline w-100">
       <span class="uk-form-icon" uk-icon="icon: mail"></span>
       <input
         class="uk-input"
-        type="text"
+        type="email"
         aria-label="Not clickable icon"
-        placeholder="Email"
-        autocomplete="none"
-        name="email"
-        id="inputEmail"
-        
+        placeholder="example@gmail.com"
+        name="email"        
         autofocus
+        required
       />
     </div>
   </div>
 
 
-  <button
-    class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
-  >Button</button>
 </form>
+        <p class="uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
+            <button class="uk-button uk-button-primary btn-send" form="receivedAccount" type="submit">Enviar</button>
+        </p>
+    </div>
+</div>
 
 {{!-- password --}}
 
-<button
-  hidden
-  id="alert"
-  class="uk-button uk-button-default demo"
-  type="button"
-  onclick="UIkit.notification({message: '{{message}}…', status: 'danger'})"
->With icon</button>
-{{#if message}}
-  <script>
-    document.addEventListener('DOMContentLoaded', function(){
-    let element = document.querySelector('#alert').onclick(true);
-    })
-  </script>
-{{/if}}
-
-{{#if success_msg}}
-  <button
-    hidden
-    id="alertS"
-    class="uk-button uk-button-default demo"
-    type="button"
-    onclick="UIkit.notification({message: '{{success_msg}}…', status: 'success'})"
-  >With icon</button>
-  <script>
-    document.addEventListener('DOMContentLoaded', function(){
-    let element = document.querySelector('#alertS').onclick(true);
-    })
-  </script>
-{{/if}}
-{{#if error_msg}}
-  <button
-    hidden
-    id="alertE"
-    class="uk-button uk-button-default demo"
-    type="button"
-    onclick="UIkit.notification({message: '{{error_msg}}…', status: 'danger'})"
-  >With icon</button>
-  <script>
-    document.addEventListener('DOMContentLoaded', function(){
-    let element = document.querySelector('#alertE').onclick(true);
-    })
-  </script>
-{{/if}}
+{{> messageSignIn }}
 
 <script type="module" src="/js/signIn.js"></script>

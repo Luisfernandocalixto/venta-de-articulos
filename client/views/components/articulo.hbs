@@ -1,5 +1,5 @@
 <!-- artículo -->
-<div class="uk-child-width-expand@s" style="margin: 0px auto;" uk-grid>
+<div class="uk-child-width-expand@s m-auto" style="" uk-grid>
   <div class="uk-grid-item-match">
     <div class="uk-card uk-card-default uk-card-body">
       <form
@@ -13,10 +13,10 @@
 
           <div class="uk-margin">
             <textarea
-              class="uk-textarea"
+              class="uk-textarea textarea"
               name="description"
               minlength="2"
-              maxlength="300"
+              maxlength="300" 
               rows="5"
               placeholder="Descripción"
               aria-label="Textarea"
@@ -31,30 +31,35 @@
                 type="file"
                 name="image"
                 aria-label="Custom controls"
-                accept=".jpg, .jpeg, .png"
+                accept=".jpg, .jpeg, .png , .webp"
                 required
               />
+              <dl class="uk-description-list">
+    <dd>Se aceptan imágenes de tipo jpg, jpeg, png o webp</dd>
+    <div class="showPreview" ></div>
+      </dl>
               <button
                 class="uk-button uk-button-default"
                 type="button"
                 tabindex="-1"
-              >Select</button>
+              >Seleccionar imagen</button>
             </div>
           </div>
         </fieldset>
 
         <button
-          class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
-        >Button</button></form>
+          class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom buttonSend"
+          type="submit"
+        >Publicar</button></form>
 
     </div>
   </div>
   <div>
-    <h3 style="color: inherit;">Mis artículos</h3>
+    <h3 style="" class="color-inherit">Mis artículos</h3>
     <p>
    Cantidad de artículos ofertados: {{this.articles.length}}
     </p>
-    <article class="section" style="height: 500px; overflow-y: scroll;">
+    <article class="section overflow-y-scroll" style="">
       {{#each articles}}
         <div
           class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin"
@@ -76,36 +81,7 @@
 
   </div>
 </div>
-<div style="display: flex; justify-content: center; width: 100%;">
-</div>
 <!-- artículo -->
 
-{{#if success_msg}}
-  <button
-    hidden
-    id="alertSA"
-    class="uk-button uk-button-default demo"
-    type="button"
-    onclick="UIkit.notification({message: '{{success_msg}}…', status: 'success'})"
-  >With icon</button>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    let element = document.querySelector('#alertSA').onclick(true);
-    });
-  </script>
-{{/if}}
-{{#if error_msg}}
-  <button
-    hidden
-    id="alertE"
-    class="uk-button uk-button-default demo"
-    type="button"
-    onclick="UIkit.notification({message: '{{error_msg}}…', status: 'danger'})"
-  >With icon</button>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    let element = document.querySelector('#alertE').onclick(true);
-    });
-  </script>
-{{/if}}
+<script type="module" src="/js/articulo.js"></script>
 

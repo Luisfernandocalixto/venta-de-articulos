@@ -1,5 +1,5 @@
 {{! account }}
-<div class="uk-card uk-card-default uk-width-1-2@m" style="margin: 0 auto;">
+<div class="uk-card uk-card-default uk-width-1-2@m m-auto" style="">
   <div class="uk-card-header">
     <div class="uk-grid-small uk-flex-middle" uk-grid>
       <div class="uk-width-auto">
@@ -19,88 +19,51 @@
       </div>
     </div>
   </div>
-  <div class="uk-card-body" style="word-wrap: break-word !important;">
+  <div class="uk-card-body word-break" style="">
       Mi correo eléctronico:
       {{userEmail}}
   </div>
   <div class="uk-card-footer">
-    <button class="uk-button uk-button-text" id="openForm">Cambiar contraseña</button>
+    <button class="uk-button uk-button-text  uk-margin-small-right"  uk-toggle="target: #modal-example" id="openForm">Cambiar contraseña</button>
   </div>
 </div>
 {{! account }}
 {{! password }}
+<div id="modal-example" class="" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body bg-dull">
+        <h2 class="uk-modal-title uk-text-center">Ingrese una nueva contraseña</h2>
+
 <form
   id="updatePassword"
   action="/users/update-password"
   method="post"
-  style="display: none; place-content: center; height: 40vh; margin-top: 40px;"
+  style=""
 >
-  <div style="display: flex; justify-content: center;">
-    <legend class="uk-legend uk-text-center">Cambiar contraseña</legend>
-    <span id="closeForm" uk-icon="icon: close" style="cursor: pointer;"></span>
-  </div>
 
   <div class="uk-margin">
-    <div class="uk-inline">
-      <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+    <div class="uk-inline w-100">
+      <a class="uk-form-icon uk-form-icon-flip cursor-pointer" uk-icon="icon: lock"></a>
       <input
         class="uk-input"
-        type="text"
+        type="password"
         aria-label="Not clickable icon"
-        placeholder="Contraseña actual"
+        placeholder="*****"
         name="currentPassword"
+        required
       />
     </div>
   </div>
 
-  <div class="uk-margin">
-    <div class="uk-inline">
-      <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-      <input
-        class="uk-input"
-        type="text"
-        aria-label="Not clickable icon"
-        placeholder="Nueva contraseña"
-        name="newPassword"
-      />
-    </div>
-  </div>
-
-  <button
-    class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom"
-  >Button</button>
 
 </form>
 
+  <p class="uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+            <button class="uk-button uk-button-primary btn-send" form="updatePassword" type="submit">Enviar</button>
+        </p>
+    </div>
+</div>
 
-{{#if success_msg}}
-  <button
-    hidden
-    id="alertS"
-    class="uk-button uk-button-default demo"
-    type="button"
-    onclick="UIkit.notification({message: '{{success_msg}}…', status: 'success'})"
-  >With icon</button>
-  <script>
-    let element = document.querySelector('#alertS').onclick(true);
-  </script>
-{{/if}}
-{{#if error_msg}}
-  <button
-    hidden
-    id="alertE"
-    class="uk-button uk-button-default demo"
-    type="button"
-    onclick="UIkit.notification({message: '{{error_msg}}…', status: 'danger'})"
-  >With icon</button>
-  <script>
-    let element = document.querySelector('#alertE').onclick(true);
-  </script>
-{{/if}}
 
-<script>
-  document.querySelector('#openForm').addEventListener('click', function(){
-  document.querySelector('#updatePassword').style.display = 'grid' })
-  document.querySelector('#closeForm').addEventListener('click', function(){
-  document.querySelector('#updatePassword').style.display = 'none' })
-</script>
+<script type="module" src="/js/account.js "></script>
+{{> messageAccount}}

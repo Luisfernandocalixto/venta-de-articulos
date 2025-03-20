@@ -4,7 +4,7 @@
   action="/users/signUp"
   method="post"
   id="signUpForm"
-  style="display: grid; place-content: center; height: 40vh; margin-top: 40px;"
+  style=""
 >
   <legend class="uk-legend uk-text-center">Crear cuenta</legend>
 
@@ -18,9 +18,9 @@
         placeholder="Usuario"
         name="name"
         id="inputName"
-        required
         autocomplete="off"
         autofocus
+        required
       />
     </div>
   </div>
@@ -31,7 +31,7 @@
         class="uk-input"
         type="email"
         aria-label="Not clickable icon"
-        placeholder="Email"
+        placeholder="example@gmail.com"
         name="email"
         autocomplete="off"
         required
@@ -42,12 +42,12 @@
 
   <div class="uk-margin">
     <div class="uk-inline">
-      <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+      <a class="uk-form-icon uk-form-icon-flip cursor-pointer" uk-icon="icon: lock"></a>
       <input
         class="uk-input"
-        type="text"
+        type="password"
         aria-label="Not clickable icon"
-        placeholder="Contraseña"
+        placeholder="********"
         name="password"
         autocomplete="off"
         required
@@ -61,9 +61,9 @@
       <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
       <input
         class="uk-input"
-        type="text"
+        type="password"
         aria-label="Not clickable icon"
-        placeholder="Confirmar contraseña"
+        placeholder="********"
         autocomplete="off"
         name="confirm_password"
         required
@@ -78,62 +78,12 @@
   >Crear cuenta</button>
 
   <hr />
-  <div style="display: flex; justify-content: center; gap: 20px;">
+  <div style="" class="uk-flex uk-flex-center gap-20">
     <p>Ya tienes cuenta?</p>
     <a href="/users/signIn">Iniciar</a>
   </div>
 </form>
 <!-- signup -->
 
-{{#if errors}}
-  <button
-    hidden
-    id="alert"
-    class="uk-button uk-button-default demo"
-    type="button"
-    onclick="UIkit.notification({message: `
-        {{#each errors}}
-             {{text}} <br>
-             {{/each}}
-    `, status: 'danger'})"
-  >With icon</button>
-  <script>
-    document.addEventListener('DOMContentLoaded', function(){
-    let element = document.querySelector('#alert').onclick(true);
-    })
-  </script>
-{{/if}}
-{{#if error_msg}}
-  <button
-    hidden
-    id="alertE"
-    class="uk-button uk-button-default demo"
-    type="button"
-    onclick="UIkit.notification({message: `
-             {{error_msg}}
-    `, status: 'danger'})"
-  >With icon</button>
-  <script>
-    document.addEventListener('DOMContentLoaded', function(){
-    let element = document.querySelector('#alertE').onclick(true);
-    })
-  </script>
-{{/if}}
-{{#if success_msg}}
-  <button
-    hidden
-    id="alertS"
-    class="uk-button uk-button-default demo"
-    type="button"
-    onclick="UIkit.notification({message: `
-              {{success_msg}}
-    `, status: 'success'})"
-  >With icon</button>
-  <script>
-    document.addEventListener('DOMContentLoaded', function (){
-    let element = document.querySelector('#alertS').onclick(true);
-    })
-  </script>
-{{/if}}
-
+{{> messageSignup }}
 <script type="module" src="/js/signUp.js"></script>

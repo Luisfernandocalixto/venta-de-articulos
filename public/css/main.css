@@ -162,3 +162,102 @@ img {
     object-fit: contain;
 }
 
+/* form signIn  */
+.formSignIn {
+    display: grid;
+    place-content: center;
+    height: 40vh;
+    margin-top: 40px;
+}
+
+.gap-20 {
+    gap: 20px;
+}
+
+.color-inherit {
+    color: inherit;
+}
+
+form[action="/users/forgot-password"] {
+    /* display: none; */
+    /* place-content: center; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* height: 40vh; */
+    margin-top: 40px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* form signIn  */
+
+.w-100 {
+    width: 100%;
+}
+
+.bg-dull {
+    background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+}
+
+
+/* form reset password  */
+.formReset {
+    display: grid;
+    place-content: center;
+    height: 40vh;
+    margin-top: 40px;
+}
+
+/* form reset password  */
+
+#signUpForm {
+    display: grid;
+    place-content: center;
+    height: 40vh;
+    margin-top: 40px;
+}
+
+.m-auto {
+    margin: 0px auto;
+}
+
+.textarea {
+    /* field-sizing: content; */
+    resize: none;
+
+}
+
+.showPreview {
+    & embed {
+        object-fit: cover;
+    }
+
+}
+
+.overflow-y-scroll {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.word-break {
+    word-wrap: break-word !important;
+}
+
+/* form Update Password */
+#updatePassword {
+    place-content: center;
+    margin-top: 10px;
+}
+
+/* navigation  */
+.imageNavigation {
+    width: 100vw;
+    object-fit: cover;
+    height: 100px;
+
+}
+
+/* navigation  */

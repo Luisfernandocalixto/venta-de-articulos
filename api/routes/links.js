@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
 
         res.render('./components/home.hbs', { articles })
     } catch (error) {
-        console.log('Error', error);
+        res.status(500).json({ message: 'Error server' });
     }
 });
 

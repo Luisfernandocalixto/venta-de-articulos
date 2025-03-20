@@ -12,7 +12,7 @@ router.get('/article', isAuthenticated, async (req, res) => {
 
         res.render('./components/articulo.hbs', { present, articles })
     } catch (error) {
-        console.log('Error', error);
+        res.status(500).json({ message: 'Error server'});
     }
 });
 
@@ -20,11 +20,10 @@ router.get('/articles', isAuthenticated, async (req, res) => {
     try {
         const present = req.user.name;
         const articles = await Image.find({}).sort({ createdAt: -1 }).lean();
-
-
+        
         res.render('./components/articleHome.hbs', { present, articles })
     } catch (error) {
-        console.log('Error', error);
+        res.status(500).json({ message: 'Error server'});
     }
 });
 

@@ -1,0 +1,29 @@
+
+{{#if success_msg}}
+  <button
+    hidden
+    id="alertSA"
+    class="uk-button uk-button-default demo"
+    type="button"
+    onclick="UIkit.notification({message: '{{success_msg}}…', status: 'success'})"
+  >With icon</button>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    let element = document.querySelector('#alertSA').onclick(true);
+    });
+  </script>
+{{/if}}
+{{#if error_msg}}
+  <button
+    hidden
+    id="alertE"
+    class="uk-button uk-button-default demo"
+    type="button"
+    onclick="UIkit.notification({message: '{{error_msg}}…', status: 'danger'})"
+  >With icon</button>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    let element = document.querySelector('#alertE').onclick(true);
+    });
+  </script>
+{{/if}}
