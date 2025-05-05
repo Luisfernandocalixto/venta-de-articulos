@@ -26,13 +26,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const setTheme = switcherTheme.checked ? 'dark' : 'light';
 
         root.setAttribute('data-theme', setTheme);
-        root.localStorage('theme', setTheme);
+        localStorage.setItem('theme', setTheme);
     }
 
 
 
     
-    // let elem = $('article > div:nth-child(even)').text();
     $('section > div div').odd().addClass('uk-card-media-left uk-cover-container');
     $('article > div div').odd().addClass('uk-flex-last@s uk-card-media-right uk-cover-container');
     

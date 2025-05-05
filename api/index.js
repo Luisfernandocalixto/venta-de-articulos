@@ -6,12 +6,16 @@ const multer = require('multer');
 const path = require('path');
 const flash = require('connect-flash');
 const passport = require('passport');
+const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
+const { JWT_SECRET } = require('./config/config.js');
 
 
 // server
 const app = express();
 require('../api/database/database.js');
-require('../api/config/passport.js');
+app.disable('x-powered-by');
+app.use(cookieParser());
 
 
 app.set('port', process.env.PORT);
@@ -26,15 +30,21 @@ app.engine('.hbs', engine({
 
 app.set('view engine', '.hbs');
 
+app.use((req, res, next) => {
+    const token = req.cookies.access_token
+    req.session = { user: null }
+    try {
+        const data = jwt.verify(token, JWT_SECRET)
+        req.session.user = data
+    } catch (error) {
+    }
+    next();
+});
+
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json());
-app.disable('x-powered-by');
 
-app.use(session({
-    secret: 'mysecretapp',
-    resave: false,
-    saveUninitialized: false,
-}))
+
 app.use(flash())
 app.use((req, res, next) => {
     res.locals.message = req.flash('error');
@@ -53,21 +63,17 @@ app.use((req, res, next) => {
 });
 
 
-app.use(passport.initialize())
-app.use(passport.session())
-app.use((req, res, next) => {
-    res.locals.user = req.user || null;
-    next();
-})
-
-
-
 app.use(require('../api/routes/links.js'));
 app.use(require('../api/routes/users.js'));
 app.use(require('../api/routes/articles.js'));
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.use(express.static(path.join(__dirname, '/public')));
+
+app.use((req, res) => {
+    res.render('./components/404.hbs');
+})
+
 
 app.listen(app.get('port'), () => {
     console.log(`Server listening on http://localhost:${app.get('port')}`)

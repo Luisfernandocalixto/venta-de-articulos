@@ -168,6 +168,11 @@ img {
     place-content: center;
     height: 40vh;
     margin-top: 40px;
+
+    & input {
+        width: 450px;
+    }
+
 }
 
 .gap-20 {
@@ -179,12 +184,9 @@ img {
 }
 
 form[action="/users/forgot-password"] {
-    /* display: none; */
-    /* place-content: center; */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* height: 40vh; */
     margin-top: 40px;
 }
 
@@ -213,11 +215,16 @@ form[action="/users/forgot-password"] {
 
 /* form reset password  */
 
-#signUpForm {
+.signUpForm {
     display: grid;
     place-content: center;
     height: 40vh;
     margin-top: 40px;
+
+    & input {
+        width: 450px;
+    }
+
 }
 
 .m-auto {
@@ -225,7 +232,6 @@ form[action="/users/forgot-password"] {
 }
 
 .textarea {
-    /* field-sizing: content; */
     resize: none;
 
 }
@@ -261,3 +267,51 @@ form[action="/users/forgot-password"] {
 }
 
 /* navigation  */
+
+/* style signIn  */
+.contentSignIn {
+    align-content: center;
+    align-items: center;
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+        "aside main main"
+    ;
+}
+
+@media (width < 700px) {
+    .contentSignIn {
+        grid-template-areas:
+            "main main main"
+            "aside aside aside"
+        ;
+    }
+
+    .formSignIn,
+    .signUpForm {
+        & input {
+            width: 100%;
+        }
+    }
+}
+
+.lateral {
+    margin-top: 70px;
+    grid-area: aside;
+
+}
+
+.form {
+    margin-top: 70px;
+    grid-area: main;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.image_404 {
+    aspect-ratio: 9/16;
+    width: 500px;
+}
