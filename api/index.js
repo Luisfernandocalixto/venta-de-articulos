@@ -8,7 +8,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET } = require('./config/config.js');
+const { JWT_SECRET, PORT, PORT_SECOND } = require('./config/config.js');
 
 
 // server
@@ -18,7 +18,7 @@ app.disable('x-powered-by');
 app.use(cookieParser());
 
 
-app.set('port', process.env.PORT);
+app.set('port', PORT || PORT_SECOND);
 
 app.set('views', path.join(__dirname, '../client/views/'));
 app.engine('.hbs', engine({
