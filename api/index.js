@@ -18,7 +18,7 @@ app.disable('x-powered-by');
 app.use(cookieParser());
 
 
-app.set('port', PORT || PORT_SECOND);
+app.set('port', process.env.PORT || PORT_SECOND);
 
 app.set('views', path.join(__dirname, '../client/views/'));
 app.engine('.hbs', engine({
