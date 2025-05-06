@@ -52,6 +52,7 @@ app.use((req, res, next) => {
 app.use(require('../api/routes/links.js'));
 app.use(require('../api/routes/users.js'));
 app.use(require('../api/routes/articles.js'));
+
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.use(express.static(path.join(__dirname, '/public')));

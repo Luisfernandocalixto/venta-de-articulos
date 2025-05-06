@@ -1,25 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
-const User = require('../models/User.js');
-const Image = require('../models/Image.js');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
-const passport = require('passport');
 const flash = require('connect-flash');
-const { isAuthenticated } = require('../helpers/auth.js');
-const bcrypt = require('bcryptjs');
-const { Resend } = require('resend');
-const SibApiV3Sdk = require('@sendinblue/client');
-const { EMAIL, NAME, BREVO_API_KEY, URL, JWT_SECRET } = require('../config/config.js');
 const { UserController } = require('../controllers/users.js');
 const { isLoggedIn, isNotLoggedIn } = require('../config/auth.js');
 
-const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
-apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, BREVO_API_KEY);
-
-const regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
 const uploadDir = path.join(__dirname, '../public/uploads');
 

@@ -5,11 +5,11 @@ const regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { JWT_SECRET, EMAIL, NAME, URL, BREVO_API_KEY } = require("../config/config");
-const SibApiV3Sdk = require('@sendinblue/client');
+const Brevo = require('@getbrevo/brevo');
 
-const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+const apiInstance = new Brevo.TransactionalEmailsApi();
 
-apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, BREVO_API_KEY);
+apiInstance.setApiKey(Brevo.TransactionalEmailsApiApiKeys.apiKey, BREVO_API_KEY);
 
 class UserController {
     static async getSignIn(req, res) {
