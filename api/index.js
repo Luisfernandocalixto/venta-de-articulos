@@ -1,11 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const { engine } = require('express-handlebars');
-const session = require('express-session');
-const multer = require('multer');
 const path = require('path');
-const flash = require('connect-flash');
-const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET, PORT, PORT_SECOND } = require('./config/config.js');
@@ -44,16 +40,6 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json());
 
-
-app.use(flash())
-app.use((req, res, next) => {
-    res.locals.message = req.flash('error');
-    res.locals.success_msg = req.flash('success_msg');
-    res.locals.error_msg = req.flash('error_msg');
-    res.locals.error = req.flash('error');
-
-    next();
-});
 
 app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
