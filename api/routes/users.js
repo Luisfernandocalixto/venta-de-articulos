@@ -3,7 +3,6 @@ const router = express.Router();
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
-const flash = require('connect-flash');
 const { UserController } = require('../controllers/users.js');
 const { isLoggedIn, isNotLoggedIn } = require('../config/auth.js');
 
@@ -35,7 +34,6 @@ const upload = multer({
             return cb(null, true);
         }
         else {
-            req.flash('error_msg', 'Archivo invalido!')
             cb(null, false);
         }
 
