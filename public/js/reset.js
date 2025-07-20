@@ -1,6 +1,6 @@
 import { showPassword, checkInput } from '/js/functions.js';
 document.addEventListener('DOMContentLoaded', function () {
-
+// variables and elements of DOM => class="formReset"
     const formReset = document.querySelector('.formReset');
     const buttonReset = formReset.querySelector('button[type="submit"]');
     const inputPassword = formReset.querySelector('input');

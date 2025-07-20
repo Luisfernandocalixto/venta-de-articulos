@@ -1,6 +1,8 @@
 import { checkForm, showPassword } from '/js/functions.js';
-document.addEventListener('DOMContentLoaded', function () {
+import { showMessage } from '/js/messageSignIn.js';
 
+document.addEventListener('DOMContentLoaded', function () {
+// variables and elements of DOM => id="signInForm"
     let signInForm = document.querySelector('#signInForm');
     let buttonAccount = document.querySelector('.btn-send');
     let buttonSignIn = signInForm.querySelector('button[type="submit"]');
@@ -9,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let inputPassword = document.querySelector('#inputPassword');
     let span = signInForm.querySelector('a.cursor-pointer');
 
-    // buttonAccount.disabled = true;
 
     span.addEventListener('click', function () {
         showPassword(inputPassword, span);
@@ -42,10 +43,11 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .then(data => {
                 if (!data) {
-
+                    
                 }
                 else {
-                    UIkit.notification({message: `${data}`, status: 'danger'})
+                    const messageResponse = showMessage(data)
+                    UIkit.notification({message: `${messageResponse}`, status: 'danger'})
 
                 }
 

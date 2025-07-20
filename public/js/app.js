@@ -2,7 +2,7 @@ import moonSwitch from '../js/moonSwitch .js';
 import sunSwitch from '../js/sunSwitch.js';
 
 document.addEventListener('DOMContentLoaded', function () {
-
+// theme of page
     const storageTheme = localStorage.getItem('theme');
     const systemColorScheme = window.matchMedia('(prefers-color-scheme:dark').matches ? 'dark' : 'light';
 
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    
+    // position of elements
     $('section > div div').odd().addClass('uk-card-media-left uk-cover-container');
     $('article > div div').odd().addClass('uk-flex-last@s uk-card-media-right uk-cover-container');
     

@@ -25,7 +25,7 @@ class UserController {
             const { email, password } = req.body
 
             const user = await UserRepository.login({ email, password })
-            const token = jwt.sign({ id: user.id, name: user.name, email: user.email }, JWT_SECRET, { expiresIn: '1h' })
+            const token = jwt.sign({ id: user.id, name: user.name, email: user.email , date : user.date}, JWT_SECRET, { expiresIn: '1h' })
 
 
             res.cookie('access_token', token, {
@@ -35,7 +35,7 @@ class UserController {
                 maxAge: 1000 * 60 * 60 // la cookie tiene un tiempo de validez de 1 hora
             }).send({ user, token })
         } catch (error) {
-
+            // case of error            
             if (error.message.includes('email')) return res.status(401).json(error.message)
             if (error.message.includes('password')) return res.status(401).json(error.message)
             if (error.message.includes('username')) return res.status(401).json(error.message)
@@ -83,6 +83,7 @@ class UserController {
 
 
         } catch (error) {
+            // case of error
             if (error.message.includes('name')) return res.render('components/signUp', { error_msg: error.message });
             if (error.message.includes('email')) return res.render('components/signUp', { error_msg: error.message });
             if (error.message.includes('password')) return res.render('components/signUp', { error_msg: error.message });
@@ -95,13 +96,16 @@ class UserController {
     static async Account(req, res) {
         try {
             const currentSession = req.session;
-            const { name, email } = currentSession.user;
+            const { name, email, date } = currentSession.user;
             const username = name;
             const userEmail = email;
-
+            const userDate = date;
             const present = name;
 
-            res.render('./components/account', { username, userEmail, present });
+            const {success_msg, error_msg} = req.query;
+
+
+            res.render('./components/account', { username, userEmail, userDate, present, success_msg, error_msg });
         } catch (error) {
             res.status(500).json({ message: 'Server error' });
 
@@ -126,23 +130,23 @@ class UserController {
             if (!verify.success) {
                 const message = JSON.parse(verify.error);
                 const errors = message.map(err => err.message);
-                return res.render('components/account.hbs', { error_msg: errors, username, userEmail, present })
+                return res.redirect(`/users/account/?success_msg=&error_msg=${errors}`)
             }
 
             if (!regex.test(currentPassword.trim())) {
-                return res.render('components/account', { error_msg: 'Password should have length of 8 character minimum, should have letters, numbers and symbol', username, userEmail, present });
+                return res.redirect(`/users/account/?success_msg=&error_msg=Password should have length of 8 character minimum, should have letters, numbers and symbol`);
             }
 
             const isMatch = await User.findById(id);
             if (!isMatch) {
-                return res.render('components/account', { error_msg: 'User no found!', username, userEmail, present });
+                return res.redirect(`/users/account/?success_msg=&error_msg=User no found!`);
             }
 
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(currentPassword.trim(), salt);
             isMatch.password = hashedPassword;
             await isMatch.save();
-            return res.render('components/account', { success_msg: 'Password update successfully!', username, userEmail, present });
+            return res.redirect(`/users/account/?success_msg=Password update successfully!`);
         } catch (error) {
             res.status(500).json({ message: 'Error server' })
 
@@ -184,10 +188,10 @@ class UserController {
                 };
                 apiInstance.sendTransacEmail(sendSmtpEmail).then(
                     function (data) {
-                        console.log('Correo enviado exitosamente. Respuesta:');
+                        console.log('Email send with exit. Response:');
                     },
                     function (error) {
-                        console.error('Error al enviar el correo:');
+                        console.error('Error in send the email:');
                     }
                 );
                 return res.render('./components/signIn', { success_msg: 'send link your email for reset password!' })
@@ -266,21 +270,19 @@ class UserController {
         try {
 
             const currentSession = req.session;
-            const { id, name } = currentSession.user
+            const { id } = currentSession.user
             const userId = id;
-            const present = name;
-            const articles = await Image.find({ user: id }).lean()
 
 
             if (req.file.filename === undefined) {
-                return res.render('./components/articulo', { error_msg: 'Required inputs', articles, present });
+                return res.redirect(`/article/?success_msg=&error_msg=Required inputs`)
             }
             const imageUrl = req.file.filename;
             const description = req.body.description;
 
 
             if (!userId || !imageUrl || !description) {
-                return res.render('./components/articulo', { error_msg: 'Required inputs', present, articles })
+                return res.redirect(`/article/?success_msg=&error_msg=Required inputs`)
             }
             else {
 
@@ -291,7 +293,7 @@ class UserController {
                 })
 
                 await newImage.save();
-                return res.render('./components/articulo', { success_msg: 'Article public', present, articles })
+                return res.redirect(`/article/?success_msg=Article public&error_msg=`)
             }
 
         } catch (error) {

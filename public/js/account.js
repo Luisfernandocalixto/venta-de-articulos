@@ -1,6 +1,7 @@
 import { showPassword, checkFormText, checkInput} from "/js/functions.js";
 
 document.addEventListener('DOMContentLoaded', function () {
+    // variables and element of DOM => id="updatePassword"
     let form = document.querySelector('#updatePassword');
     let buttonSend = document.querySelector('button[type="submit"]');
     buttonSend.disabled = true;

@@ -8,12 +8,12 @@ const { isLoggedIn, isNotLoggedIn } = require('../config/auth.js');
 
 
 const uploadDir = path.join(__dirname, '../public/uploads');
-
+// create the directory if does not exist
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-
+//   create image with name original and date current
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, uploadDir);
@@ -23,7 +23,7 @@ const storage = multer.diskStorage({
 
     }
 })
-
+// image correct accept in server and limit size
 const upload = multer({
     storage: storage,
     limits: { fileSize: 1024 * 1024 * 5 },
@@ -54,7 +54,6 @@ router.get('/users/account', isLoggedIn, UserController.Account);
 router.post('/users/update-password', isLoggedIn, UserController.UpdatePassword);
 
 
-// const resend = new Resend(`${process.env.API_KEY_RESEND}`);
 
 router.post('/users/forgot-password', UserController.forgotPassword);
 

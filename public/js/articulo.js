@@ -1,13 +1,12 @@
 import { checkFormFile } from "/js/functions.js";
 document.addEventListener('DOMContentLoaded', function () {
-
+    // variables and elements of DOM => <form>
     const form = document.querySelector('form');
     const button = document.querySelector('button.buttonSend');
 
     button.disabled = true;
     const textarea = form.querySelector('textarea[name="description"]');
     const inputFile = form.querySelector('input[type="file"]');
-    const embed = form.querySelector('embed');
 
     document.addEventListener('change', function (e) {
         e.preventDefault();
@@ -50,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         else {
 
-            UIkit.notification({ message: 'Debe enviar un file válido.', status: 'warning' });
+            UIkit.notification({ message: 'Debe enviar una imagen válida.', status: 'warning' });
             button.disabled = true;
         }
     });

@@ -37,12 +37,13 @@ class UserRepository {
         if (!user) throw new Error("username does not exist!");
 
         const verifyPassword = await bcrypt.compare(password.trim(), user.password)
-        if (!verifyPassword) throw new Error("password is invalid!");
+        if (!verifyPassword) throw new Error("password is incorrect!");
 
         const publicUser = {
             id: user.id,
             name: user.name,
             email: user.email,
+            date: user.date
         }
 
         return publicUser
@@ -58,7 +59,7 @@ const userLogin = z.object({
 })
 
 const passwordLogin = z.object({
-    password: z.string({ message: 'Password  invalid!' }).trim().min(1, { message: 'Password empty!' }),
+    password: z.string({ message: 'password  invalid!' }).trim().min(1, { message: 'password empty!' }),
 
 })
 

@@ -1,3 +1,4 @@
+const regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
 export function showPassword(input, span) {
 
@@ -69,7 +70,6 @@ export function checkFormText(input, button) {
 }
 
 export function checkInput(input, button) {
-    const regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
     if (input.value.trim() === "") {
         button.disabled = true;
     }
@@ -85,7 +85,6 @@ export function checkInput(input, button) {
 }
 
 export function checkForm_Account(input, input2, input3, input4, button) {
-    const regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
     if (input.value.trim() === "" || input2.value.trim() === "" || input3.value.trim() === "" || input4.value.trim() === "") {
         button.disabled = true;

@@ -8,11 +8,13 @@ class ArticleController {
             const currentSession = req.session;
             const { id, name } = currentSession.user;
 
+            const { success_msg, error_msg } = req.query;
+
             const present = name;
             const user = id
             const articles = await Image.find({ user: user }).lean()
 
-            res.render('./components/articulo.hbs', { present, articles })
+            res.render('./components/article.hbs', { present, articles , success_msg, error_msg})
         } catch (error) {
 
             res.status(500).json({ message: 'Error server' });

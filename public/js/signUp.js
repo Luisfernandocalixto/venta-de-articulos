@@ -1,7 +1,7 @@
 import { checkForm_Account , showPasswords} from '/js/functions.js';
 
 document.addEventListener('DOMContentLoaded', function () {
-
+// variables and elements of DOM => id="signUpForm"
     let signUpForm = document.querySelector('#signUpForm');
     let buttonSignUp = document.querySelector('#signUpButton');
     buttonSignUp.disabled = true;
