@@ -1,37 +1,6 @@
 {{! articles }}
-<article class="section" >
-  <div
-    class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin"
-    uk-grid
-  >
-    <div class="uk-cover-container">
-      <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dGllbmRhfGVufDB8fDB8fHww" alt="" uk-cover />
-      <canvas width="600" height="400"></canvas>
-    </div>
-    <div>
-      <div class="uk-card-body">
-        <h3 class="uk-card-title">Venta</h3>
-        <p>Artículos.</p>
-      </div>
-    </div>
-  </div>
-  <div
-    class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin"
-    uk-grid
-  >
-    <div class="uk-cover-container">
-      <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dGllbmRhfGVufDB8fDB8fHww" alt="" uk-cover />
-      <canvas width="600" height="400"></canvas>
-    </div>
-    <div>
-      <div class="uk-card-body">
-        <h3 class="uk-card-title">Venta</h3>
-        <p>Utensilios.</p>
-      </div>
-    </div>
-  </div>
-</article>
-<article class="section">
+<div class="isPagination" align="center"></div>
+<article class="section sectionArticles">
   {{#each articles}}
     <div
       class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin"
@@ -45,8 +14,12 @@
         <div class="uk-card-body">
           <h3 class="uk-card-title">Venta</h3>
           <p>{{description}}.</p>
+          <time datetime="{{createdAt}}"></time>
+
         </div>
       </div>
     </div>
   {{/each}}
 </article>{{! articles }}
+
+<script type="module" src="/js/articleHome.js"></script>

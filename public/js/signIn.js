@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     buttonSignIn.disabled = true;
     let inputEmail = document.querySelector('#inputEmail');
     let inputPassword = document.querySelector('#inputPassword');
-    let span = signInForm.querySelector('a.cursor-pointer');
+    let span = signInForm.querySelector('.lock');
 
 
     span.addEventListener('click', function () {

@@ -1,5 +1,5 @@
 <!-- article -->
-<div class="uk-child-width-expand@s m-auto" style="" uk-grid>
+<div class="uk-child-width-expand@s m-auto"  uk-grid>
   <div class="uk-grid-item-match">
     <div class="uk-card uk-card-default uk-card-body">
       <form
@@ -34,7 +34,7 @@
                 required
               />
               <dl class="uk-description-list">
-    <dd>Se aceptan imágenes de tipo jpg, jpeg, png o webp</dd>
+    <span>Se aceptan imágenes de tipo jpg, jpeg, png o webp</span>
     <div class="showPreview" ></div>
       </dl>
               <button
@@ -54,11 +54,12 @@
     </div>
   </div>
   <div>
-    <h3 style="" class="color-inherit">Mis artículos</h3>
+    <h3  class="color-inherit" data-id="{{id}}" >Mis artículos</h3>
     <p>
-   Cantidad de artículos ofertados: {{this.articles.length}}
+   Cantidad de artículos ofertados: {{this.countArticles}}
     </p>
-    <article class="section overflow-y-scroll" style="">
+    <div class="isPagination" align="center"></div>
+    <article class="section overflow-y-scroll sectionArticles" >
       {{#each articles}}
         <div
           class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin"
@@ -82,5 +83,5 @@
 </div>
 <!-- article -->
 {{> messageArticulo}}
-<script type="module" src="/js/articulo.js"></script>
+<script type="module" src="/js/article.js"></script>
 

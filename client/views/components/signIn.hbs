@@ -40,7 +40,7 @@
 
   <div class="uk-margin">
     <div class="uk-inline">
-      <a class="uk-form-icon uk-form-icon-flip cursor-pointer" uk-icon="icon: lock"></a>
+      <button type="button" class="uk-form-icon uk-form-icon-flip cursor-pointer lock" uk-icon="icon: lock"></button>
       <input
         class="uk-input"
         type="password"
@@ -74,9 +74,9 @@
 <br />
 
 {{!-- password --}}
-<div align="center" style="" class="gap-20 uk-margin-auto">
+<div align="center"  class="gap-20 uk-margin-auto">
   <p>Olvidaste tu contraseña?</p>
-  <button class="uk-button uk-button-text color-inherit uk-button uk-button-default uk-margin-small-right" id="btnRecover" style=""  type="button" uk-toggle="target: #modal-example">✅ Recuperar cuenta</button>
+  <button class="uk-button uk-button-text color-inherit uk-button uk-button-default uk-margin-small-right" id="btnRecover"   type="button" uk-toggle="target: #modal-example">✅ Recuperar cuenta</button>
 </div>
 
 <!-- This is the modal -->
@@ -87,11 +87,11 @@
   id="receivedAccount"
   action="/users/forgot-password"
   method="post"
-  style=""
+  
 
 >
 
-<div style="" class="uk-flex uk-flex-center">
+<div  class="uk-flex uk-flex-center">
 
 </div>
   <div class="uk-margin flex uk-flex-center">

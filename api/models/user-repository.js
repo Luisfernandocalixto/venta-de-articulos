@@ -7,7 +7,7 @@ class UserRepository {
     static async create({ name, email, password, confirm_password }) {
         // 1 validations of username , password  //zod
 
-        const isValidUser = validateSignup({ name, email, password, confirm_password });
+        const isValidUser = validatePartialDataOfUser({ name, email, password, confirm_password });
         if (!isValidUser.success) {
             const message = JSON.parse(isValidUser.error);
             const errors = message.map(err => err.message);
@@ -19,16 +19,9 @@ class UserRepository {
     static async login({ email, password }) {
 
 
-        const isValidUser = validateUserLogin({ email });
+        const isValidUser = validatePartialDataOfUser({ email, password });
         if (!isValidUser.success) {
             const message = JSON.parse(isValidUser.error);
-            const errors = message.map(err => err.message);
-            throw new Error(errors);
-        }
-
-        const isValidPassword = validatePasswordLogin({ password });
-        if (!isValidPassword.success) {
-            const message = JSON.parse(isValidPassword.error);
             const errors = message.map(err => err.message);
             throw new Error(errors);
         }
@@ -54,39 +47,21 @@ class UserRepository {
 }
 
 
-const userLogin = z.object({
-    email: z.string('email invalid!').trim().min(1, { message: 'email empty!' }).email({ message: 'email invalid!' })
-})
-
-const passwordLogin = z.object({
-    password: z.string({ message: 'password  invalid!' }).trim().min(1, { message: 'password empty!' }),
-
-})
-
-function validateUserLogin(input) {
-    return userLogin.safeParse(input)
-}
-function validatePasswordLogin(input) {
-    return passwordLogin.safeParse(input)
-}
-
-const userSignup = z.object({
+const user = z.object({
+    id: z.union([z.string({ message: 'id invalid!' }).trim().min(1, { message: 'id empty!' }), z.number({ message: 'id invalid!' }).min(1, { message: 'id empty' })]),
     name: z.string('name invalid!').trim().min(1, { message: 'name empty!' }),
     email: z.string('email invalid!').trim().min(1, { message: 'email empty!' }).email({ message: 'email invalid!' }),
     password: z.string({ message: 'Password  invalid!' }).trim({}).min(1, { message: 'Password empty!' }),
     confirm_password: z.string({ message: 'Confirm password  invalid!' }).trim({}).min(1, { message: 'Confirm password empty!' }),
+    token: z.string({ message: 'Token  invalid!' }).trim({}).min(1, { message: 'Token empty!' }),
 
 })
 
-function validateSignup(input) {
-    return userSignup.safeParse(input)
-}
-
-function validatePartialPassword(input) {
-    return userSignup.partial().safeParse(input)
+function validatePartialDataOfUser(input) {
+    return user.partial().safeParse(input)
 }
 
 module.exports = {
     UserRepository,
-    validatePartialPassword
+    validatePartialDataOfUser
 };

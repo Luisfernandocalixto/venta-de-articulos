@@ -1,6 +1,6 @@
 const Image = require("../models/Image");
 const User = require("../models/User");
-const { UserRepository, validatePartialPassword } = require("../models/user-repository");
+const { UserRepository, validatePartialDataOfUser } = require("../models/user-repository");
 const regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
@@ -16,7 +16,7 @@ class UserController {
         try {
             res.render('./components/signIn.hbs');
         } catch (error) {
-            res.status(500).json({ message: 'Error server' });
+            res.status(500).json('Error show page signIn');
         }
     }
 
@@ -47,7 +47,7 @@ class UserController {
         try {
             res.render('./components/signUp.hbs')
         } catch (error) {
-            res.status(500).json({ message: 'Error server' });
+            res.status(500).json("Error show page signUp");
         }
     }
 
@@ -88,7 +88,7 @@ class UserController {
             if (error.message.includes('email')) return res.render('components/signUp', { error_msg: error.message });
             if (error.message.includes('password')) return res.render('components/signUp', { error_msg: error.message });
             if (error.message.includes('confirm_password')) return res.render('components/signUp', { error_msg: error.message });
-            return res.status(500).json({ message: 'Server error' });
+            return res.status(500).json("Error signUp");
 
         }
     }
@@ -97,17 +97,13 @@ class UserController {
         try {
             const currentSession = req.session;
             const { name, email, date } = currentSession.user;
-            const username = name;
-            const userEmail = email;
-            const userDate = date;
-            const present = name;
 
             const {success_msg, error_msg} = req.query;
 
 
-            res.render('./components/account', { username, userEmail, userDate, present, success_msg, error_msg });
+            res.render('./components/account', { username: name, userEmail: email, userDate: new Date(date).toLocaleString('es-MX',{ day:'2-digit', weekday: 'short', month: 'short', year: 'numeric'}), present:name, success_msg, error_msg });
         } catch (error) {
-            res.status(500).json({ message: 'Server error' });
+            res.status(500).json("Error show account");
 
         }
     }
@@ -116,17 +112,12 @@ class UserController {
     static async UpdatePassword(req, res) {
         try {
             const { currentPassword } = req.body;
-            const currentSession = req.session
-            const { id } = currentSession.user
-
-            const { name, email } = currentSession.user;
-            const username = name;
-            const userEmail = email;
-
-            const present = name;
+            const currentSession = req.session;
+            const { id } = currentSession.user;
 
 
-            const verify = validatePartialPassword({ currentPassword });
+
+            const verify = validatePartialDataOfUser({password: currentPassword });
             if (!verify.success) {
                 const message = JSON.parse(verify.error);
                 const errors = message.map(err => err.message);
@@ -148,7 +139,7 @@ class UserController {
             await isMatch.save();
             return res.redirect(`/users/account/?success_msg=Password update successfully!`);
         } catch (error) {
-            res.status(500).json({ message: 'Error server' })
+            res.status(500).json("Error update password")
 
         }
     }
@@ -199,7 +190,7 @@ class UserController {
             }
         } catch (error) {
 
-            res.status(500).json({ message: 'Server error', error });
+            res.status(500).json("Error send email");
 
         }
 
@@ -208,14 +199,16 @@ class UserController {
     static async getResetPasswordByToken(req, res) {
         try {
             const { token } = req.params;
-            if (!token) {
-                return res.render('./components/signIn', { error_msg: 'Token no found or expired' });
-            }
-            else {
+            const verify = validatePartialDataOfUser({token});
+            if (!verify.success) {
+                const message = JSON.parse(verify.error);
+                const errors = message.map(err => err.message);
+                return res.render('./components/signIn', { error_msg: errors });
+            } else {
                 return res.status(200).render('./components/reset-password.hbs', { token });
             }
         } catch (error) {
-            res.status(500).json({ message: 'Server error' });
+            res.status(500).json("Error obtain token");
         }
     }
 
@@ -223,9 +216,13 @@ class UserController {
         try {
             const { password } = req.body;
             const { token } = req.params;
+            const verify = validatePartialDataOfUser({token});
 
-            if (!token) {
-                return res.render('./components/signIn', { error_msg: 'Token no found or expired' });
+            
+            if (!verify.success) {
+                const message = JSON.parse(verify.error);
+                const errors = message.map(err => err.message);
+                return res.render('./components/signIn', { error_msg: errors });
             }
             if (!regex.test(password.trim())) {
                 return res.render('./components/signIn', { error_msg: 'Password should have length of 8 character minimum, should have letters, numbers and symbol' });
@@ -249,9 +246,9 @@ class UserController {
             }
         } catch (error) {
             if (error.name === 'TokenExpiredError') {
-                return res.status(400).json({ message: 'Token expired!' });
+                return res.status(400).json('Token expired!');
             }
-            res.status(500).json({ message: 'Server error' });
+            res.status(500).json("Error reset password");
 
         }
 
@@ -261,7 +258,7 @@ class UserController {
         try {
             res.clearCookie('access_token').redirect('/users/signIn');
         } catch (error) {
-            res.status(500).json({ message: 'Server error' });
+            res.status(500).json("Error logout");
         }
     }
 
@@ -271,7 +268,6 @@ class UserController {
 
             const currentSession = req.session;
             const { id } = currentSession.user
-            const userId = id;
 
 
             if (req.file.filename === undefined) {
@@ -281,13 +277,13 @@ class UserController {
             const description = req.body.description;
 
 
-            if (!userId || !imageUrl || !description) {
+            if (!id || !imageUrl || !description) {
                 return res.redirect(`/article/?success_msg=&error_msg=Required inputs`)
             }
             else {
 
                 const newImage = new Image({
-                    user: userId,
+                    user: id,
                     imageUrl: imageUrl,
                     description: req.body.description
                 })
@@ -297,7 +293,7 @@ class UserController {
             }
 
         } catch (error) {
-            res.status(500).json('Error server')
+            res.status(500).json('Error upload image')
         }
     }
 

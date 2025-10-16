@@ -66,21 +66,6 @@ helpers.renameTextByArticle = text => {
 }
 
 
-helpers.showDateByProfileUser = (date) => {
-    const lengthTime = 10;
-
-    const getDate = date.slice(0, lengthTime);
-    const isDate = new Date(getDate);
-
-    const month = isDate.toLocaleString('es-MX', { month: 'long' });
-
-    const positionDate = getDate.split('-').reverse();
-    const filterDate = positionDate.filter((e, index) => index !== 1);
-    const declareDate = `${month} ${filterDate.join(', ')}`; // show date of mode => Octubre 12, 2024
-    return declareDate;
-
-}
-
 
 
 

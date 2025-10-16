@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let signUpForm = document.querySelector('#signUpForm');
     let buttonSignUp = document.querySelector('#signUpButton');
     buttonSignUp.disabled = true;
-    let icon = document.querySelector('a.cursor-pointer');
+    let icon = document.querySelector('.lock');
     let inputName = document.querySelector('#inputName');
     let inputEmail = document.querySelector('#inputEmail');
     let inputPassword = document.querySelector('#inputPassword');
