@@ -4,8 +4,9 @@
 >
   <div class="uk-card-media-left uk-cover-container">
     <img
+      fetchpriority="high"
       src="/images/photoShop.webp"
-      alt=""
+      alt="ventas"
       uk-cover
     />
     <canvas width="600" height="400"></canvas>
@@ -24,8 +25,9 @@
 >
   <div class="uk-flex-last@s uk-card-media-right uk-cover-container">
     <img
+      fetchpriority="high"
       src="/images/photoShop.webp"
-      alt=""
+      alt="ventas"
       uk-cover
     />
     <canvas width="600" height="400"></canvas>
@@ -44,7 +46,7 @@
       uk-grid
     >
       <div class="uk-cover-container">
-        <img src="/uploads/{{imageUrl}}" alt="" uk-cover />
+        <img src="/uploads/{{imageUrl}}" alt="" fetchpriority="high" uk-cover />
         <canvas width="600" height="400"></canvas>
       </div>
       <div>

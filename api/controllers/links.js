@@ -18,7 +18,7 @@ class LinksController {
             });
 
             res.render('./components/home.hbs', { articles })
-        } catch (error) {            
+        } catch (error) {                        
             res.status(500).json("Error show page principal");
         }
     }

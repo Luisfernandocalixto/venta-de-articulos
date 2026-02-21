@@ -5,6 +5,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET, PORT, PORT_SECOND } = require('./config/config.js');
+const { default: rateLimit } = require('express-rate-limit');
 
 
 // server
@@ -26,6 +27,15 @@ app.engine('.hbs', engine({
 }));
 
 app.set('view engine', '.hbs');
+
+
+const limiter = rateLimit({
+    windowMs: 60 * 1000, // 1 minute
+    max: 150,//  limit each ip to 150 request
+    message: 'Request limit exceeded'
+});
+
+app.use(limiter);
 
 // config of token
 app.use((req, res, next) => {
