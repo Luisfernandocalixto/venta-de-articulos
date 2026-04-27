@@ -13,4 +13,4 @@ const moon = `
 
 
 
-export default moon
+export default moon;

@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET, PORT, PORT_SECOND } = require('./config/config.js');
 const { default: rateLimit } = require('express-rate-limit');
+const morgan = require('morgan');
 
 
 // server
@@ -28,7 +29,6 @@ app.engine('.hbs', engine({
 
 app.set('view engine', '.hbs');
 
-
 const limiter = rateLimit({
     windowMs: 60 * 1000, // 1 minute
     max: 150,//  limit each ip to 150 request
@@ -36,20 +36,21 @@ const limiter = rateLimit({
 });
 
 app.use(limiter);
+app.use(morgan('dev'));
 
 // config of token
 app.use((req, res, next) => {
-    const token = req.cookies.access_token
-    req.session = { user: null }
+    const token = req.cookies.access_token;
+    req.session = { user: null };
     try {
-        const data = jwt.verify(token, JWT_SECRET)
-        req.session.user = data
+        const data = jwt.verify(token, JWT_SECRET);
+        req.session.user = data;
     } catch (error) {
     }
     next();
 });
 
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // no accept cache in browser , confide data 
@@ -73,11 +74,11 @@ app.use(express.static(path.join(__dirname, '/public')));
 // page 404
 app.use((req, res) => {
     res.render('./components/404.hbs');
-})
+});
 
 // server
 app.listen(app.get('port'), () => {
-    console.log(`Server listening on http://localhost:${app.get('port')}`)
+    console.log(`Server listening on http://localhost:${app.get('port')}`);
 })
 
 module.exports = app;

@@ -1,7 +1,7 @@
 module.exports = {
     isLoggedIn(req, res, next) {
         try {
-            const user = req.session
+            const user = req.session;
             if (user.user) {
                 return next();
             }
@@ -14,7 +14,7 @@ module.exports = {
 
     isNotLoggedIn(req, res, next) {
         try {
-            const user = req.session
+            const user = req.session;
             if (!user.user) {
                 return next();
             }

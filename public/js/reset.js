@@ -12,6 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     inputPassword.addEventListener('change', function () {
         checkInput(inputPassword, buttonReset);
-    })
+    });
 
 });

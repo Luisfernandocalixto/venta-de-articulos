@@ -1,10 +1,10 @@
-const Image = require("../models/Image");
-const User = require("../models/User");
-const { UserRepository, validatePartialDataOfUser } = require("../models/user-repository");
+const Image = require("../models/Image.js");
+const User = require("../models/User.js");
+const { UserRepository, validatePartialDataOfUser } = require("../models/user-repository.js");
 const regex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { JWT_SECRET, EMAIL, NAME, URL, BREVO_API_KEY } = require("../config/config");
+const { JWT_SECRET, EMAIL, NAME, URL, BREVO_API_KEY } = require("../config/config.js");
 const Brevo = require('@getbrevo/brevo');
 
 const apiInstance = new Brevo.TransactionalEmailsApi();
@@ -22,10 +22,9 @@ class UserController {
 
     static async SignIn(req, res) {
         try {
-            const { email, password } = req.body
-
-            const user = await UserRepository.login({ email, password })
-            const token = jwt.sign({ id: user.id, name: user.name, email: user.email , date : user.date}, JWT_SECRET, { expiresIn: '1h' })
+            const { email, password } = req.body;
+            const user = await UserRepository.login({ email, password });
+            const token = jwt.sign({ id: user.id, name: user.name, email: user.email , date : user.date}, JWT_SECRET, { expiresIn: '1h' });
 
 
             res.cookie('access_token', token, {
@@ -33,19 +32,19 @@ class UserController {
                 secure: process.env.NODE_ENV === 'production', // la cookie solo se puede acceder en https
                 sameSite: 'strict', // la cookie solo se puede acceder en el mismo dominio
                 maxAge: 1000 * 60 * 60 // la cookie tiene un tiempo de validez de 1 hora
-            }).send({ user, token })
+            }).send({ user, token });
         } catch (error) {
             // case of error            
-            if (error.message.includes('email')) return res.status(401).json(error.message)
-            if (error.message.includes('password')) return res.status(401).json(error.message)
-            if (error.message.includes('username')) return res.status(401).json(error.message)
+            if (error.message.includes('email')) return res.status(401).json(error.message);
+            if (error.message.includes('password')) return res.status(401).json(error.message);
+            if (error.message.includes('username')) return res.status(401).json(error.message);
             return res.status(401).json('Error server');
         }
     }
 
     static async getSignup(req, res) {
         try {
-            res.render('./components/signUp.hbs')
+            res.render('./components/signUp.hbs');
         } catch (error) {
             res.status(500).json("Error show page signUp");
         }
@@ -55,7 +54,6 @@ class UserController {
         try {
 
             const { name, email, password, confirm_password } = req.body;
-            const user = await UserRepository.create({ name, email, password, confirm_password })
 
 
             if (password !== confirm_password) {
@@ -121,7 +119,7 @@ class UserController {
             if (!verify.success) {
                 const message = JSON.parse(verify.error);
                 const errors = message.map(err => err.message);
-                return res.redirect(`/users/account/?success_msg=&error_msg=${errors}`)
+                return res.redirect(`/users/account/?success_msg=&error_msg=${errors}`);
             }
 
             if (!regex.test(currentPassword.trim())) {
@@ -139,7 +137,7 @@ class UserController {
             await isMatch.save();
             return res.redirect(`/users/account/?success_msg=Password update successfully!`);
         } catch (error) {
-            res.status(500).json("Error update password")
+            res.status(500).json("Error update password");
 
         }
     }
@@ -149,7 +147,7 @@ class UserController {
             const { email } = req.body;
             const user = await User.findOne({ email });
             if (!user) {
-                return res.render('./components/signIn', { error_msg: 'user no found!' })
+                return res.render('./components/signIn', { error_msg: 'user no found!' });
             }
             else {
 
@@ -185,7 +183,7 @@ class UserController {
                         console.error('Error in send the email:');
                     }
                 );
-                return res.render('./components/signIn', { success_msg: 'send link your email for reset password!' })
+                return res.render('./components/signIn', { success_msg: 'send link your email for reset password!' });
 
             }
         } catch (error) {
@@ -233,7 +231,7 @@ class UserController {
 
             const user = await User.findById(userId);
             if (!user) {
-                return res.render('./components/signIn', { error_msg: 'user no found!' })
+                return res.render('./components/signIn', { error_msg: 'user no found!' });
             }
             else {
                 const salt = await bcrypt.genSalt(10);
@@ -242,7 +240,7 @@ class UserController {
                 user.password = hashedPassword;
                 await user.save();
 
-                return res.render('./components/signIn', { success_msg: 'password update successfully!' })
+                return res.render('./components/signIn', { success_msg: 'password update successfully!' });
             }
         } catch (error) {
             if (error.name === 'TokenExpiredError') {
@@ -261,39 +259,42 @@ class UserController {
             res.status(500).json("Error logout");
         }
     }
-
-
+    
+    
     static async uploadImage(req, res) {
         try {
-
+            
             const currentSession = req.session;
-            const { id } = currentSession.user
-
-
+            const { id } = currentSession.user;
+            let image = req.file.filename;
+            
             if (req.file.filename === undefined) {
-                return res.redirect(`/article/?success_msg=&error_msg=Required inputs`)
+                return res.status(500).json('Required inputs'); 
             }
             const imageUrl = req.file.filename;
             const description = req.body.description;
-
-
+            
+            
             if (!id || !imageUrl || !description) {
-                return res.redirect(`/article/?success_msg=&error_msg=Required inputs`)
+                return res.status(500).json('Required inputs'); 
             }
             else {
-
+                
                 const newImage = new Image({
                     user: id,
                     imageUrl: imageUrl,
-                    description: req.body.description
-                })
+                    description: req.body.description,
+                    createdAt: req.body.date
+                });
 
                 await newImage.save();
-                return res.redirect(`/article/?success_msg=Article public&error_msg=`)
+                
+                return res.status(200).json('Article public'); 
             }
 
         } catch (error) {
-            res.status(500).json('Error upload image')
+            
+            res.status(500).json('Error upload image'); 
         }
     }
 

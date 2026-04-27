@@ -15,52 +15,52 @@ console.log(day);
 const helpers = {};
 
 helpers.renameTextByForgot = text => {
-    if (text === messageByForgot.messageErrorUser) return 'No existe un usuario con el email ingresado!'
-    if (text === messageByForgot.messageErrorTokenOrExpired) return 'El token no existe o ha expirado!'
-    if (text === messageByForgot.messageErrorPassword) return 'La contraseña debe tener una longitud de 8 caracteres minimo, además debe contener letras, números y al menos un símbolo.!'
+    if (text === messageByForgot.messageErrorUser) return 'No existe un usuario con el email ingresado!';
+    if (text === messageByForgot.messageErrorTokenOrExpired) return 'El token no existe o ha expirado!';
+    if (text === messageByForgot.messageErrorPassword) return 'La contraseña debe tener una longitud de 8 caracteres minimo, además debe contener letras, números y al menos un símbolo.!';
 
 
-    if (text === messageByForgot.messageSuccessPasswordUpdate) return 'Contraseña actualizada satisfactoriamente!'
-    if (text === messageByForgot.messageSuccess) return 'Se ha enviado un link a su email para restablecer su contraseña!'
-    if (text === messageSignup.messageSuccess) return 'Cuenta registrada satisfactoriamente!'
+    if (text === messageByForgot.messageSuccessPasswordUpdate) return 'Contraseña actualizada satisfactoriamente!';
+    if (text === messageByForgot.messageSuccess) return 'Se ha enviado un link a su email para restablecer su contraseña!';
+    if (text === messageSignup.messageSuccess) return 'Cuenta registrada satisfactoriamente!';
 
     return text
 }
 
 helpers.renameTextByUpdatePassword = text => {
-    if (text === messageSignup.messagePasswordInvalid) return 'Contraseña  inválida!'
-    if (text === messageSignup.messagePasswordEmpty) return 'La contraseña no puede ser vacía!'
-    if (text === messageByForgot.messageErrorPassword) return 'La contraseña debe tener una longitud de 8 caracteres minimo, además debe contener letras, números y al menos un símbolo.!'
-    if (text === messageByUpdatePassword.messageErrorUserNotFound) return 'No existe un usuario con este email!'
+    if (text === messageSignup.messagePasswordInvalid) return 'Contraseña  inválida!';
+    if (text === messageSignup.messagePasswordEmpty) return 'La contraseña no puede ser vacía!';
+    if (text === messageByForgot.messageErrorPassword) return 'La contraseña debe tener una longitud de 8 caracteres minimo, además debe contener letras, números y al menos un símbolo.!';
+    if (text === messageByUpdatePassword.messageErrorUserNotFound) return 'No existe un usuario con este email!';
 
-    if (text === messageByUpdatePassword.messageSuccess) return 'Contraseña actualizada!'
+    if (text === messageByUpdatePassword.messageSuccess) return 'Contraseña actualizada!';
 
     return text
 }
 
 helpers.renameTextBySignup = text => {
-    if (text === messageSignup.messageNameInvalid) return 'Nombre inválido!'
-    if (text === messageSignup.messageNameEmpty) return 'El nombre no puede ser vacio!'
-    if (text === messageSignup.messageEmailInvalid) return 'Email inválido!'
-    if (text === messageSignup.messageEmailEmpty) return 'Email no puede ser vacio!'
-    if (text === messageSignup.messagePasswordInvalid) return 'Contraseña  inválida!'
-    if (text === messageSignup.messagePasswordEmpty) return 'La contraseña no puede ser vacía!'
-    if (text === messageSignup.messageConfirmPasswordInvalid) return 'Confirmación de contraseña inválida!'
-    if (text === messageSignup.messageConfirmPasswordEmpty) return 'Confirmación de contraseña vacía!'
-    if (text === messageSignup.messageErrorPasswordNotMatch) return 'Las contraseñas no coinciden!'
-    if (text === messageSignup.messageErrorPassword) return 'La contraseña debe tener una longitud de 8 caracteres minimo, además debe contener letras, números y al menos un símbolo.!'
-    if (text === messageSignup.messageErrorUserExist) return 'Ya existe un usuario con este email!'
+    if (text === messageSignup.messageNameInvalid) return 'Nombre inválido!';
+    if (text === messageSignup.messageNameEmpty) return 'El nombre no puede ser vacio!';
+    if (text === messageSignup.messageEmailInvalid) return 'Email inválido!';
+    if (text === messageSignup.messageEmailEmpty) return 'Email no puede ser vacio!';
+    if (text === messageSignup.messagePasswordInvalid) return 'Contraseña  inválida!';
+    if (text === messageSignup.messagePasswordEmpty) return 'La contraseña no puede ser vacía!';
+    if (text === messageSignup.messageConfirmPasswordInvalid) return 'Confirmación de contraseña inválida!';
+    if (text === messageSignup.messageConfirmPasswordEmpty) return 'Confirmación de contraseña vacía!';
+    if (text === messageSignup.messageErrorPasswordNotMatch) return 'Las contraseñas no coinciden!';
+    if (text === messageSignup.messageErrorPassword) return 'La contraseña debe tener una longitud de 8 caracteres minimo, además debe contener letras, números y al menos un símbolo.!';
+    if (text === messageSignup.messageErrorUserExist) return 'Ya existe un usuario con este email!';
 
 
-    if (text === messageSignup.messageSuccess) return 'Cuenta registrada satisfactoriamente!'
+    if (text === messageSignup.messageSuccess) return 'Cuenta registrada satisfactoriamente!';
 
     return text
 }
 
 helpers.renameTextByArticle = text => {
-    if (text === messageByArticle.messageErrorInputs) return 'Necesita completar todos los campos!'
+    if (text === messageByArticle.messageErrorInputs) return 'Necesita completar todos los campos!';
 
-    if (text === messageByArticle.messageSuccess) return 'Articulo publicado!'
+    if (text === messageByArticle.messageSuccess) return 'Articulo publicado!';
 
     return text
 }

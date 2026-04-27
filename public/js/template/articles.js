@@ -17,8 +17,10 @@ export const isArticles = ({ data }) => {
               <h3 class="uk-card-title">Venta</h3>
               <p>${item.description}.</p>
               <time datetime="${item.createdAt}">${item.createdAt}</time>
-    
-            </div>
+
+              <p class="uk-alert-close uk-text-danger buttonDelete" id="${item.id}" uk-close></p>
+
+              </div>
           </div>
         </div>
                 `

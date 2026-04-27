@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     signInForm?.addEventListener('submit', e => {
-        e.preventDefault()
+        e.preventDefault();
 
         buttonAccount.disabled = true;
         fetch('/users/signIn', {
@@ -47,13 +47,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 else {
                     const messageResponse = showMessage(data)
-                    UIkit.notification({message: `${messageResponse}`, status: 'danger'})
+                    UIkit.notification({message: `${messageResponse}`, status: 'danger'});
 
                 }
 
             })
             .finally(() => {
-                buttonAccount.disabled = false
+                buttonAccount.disabled = false;
                 signInForm.reset();
             })
 

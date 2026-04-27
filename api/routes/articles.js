@@ -6,6 +6,8 @@ const { ArticleController } = require('../controllers/articles.js');
 
 router.get('/article', isLoggedIn, ArticleController.article);
 
+router.delete('/article/:id', isLoggedIn, ArticleController.deleteArticle);
+
 router.get('/articles', isLoggedIn, ArticleController.articles);
 
 router.get('/shop', isLoggedIn, ArticleController.shopArticles);

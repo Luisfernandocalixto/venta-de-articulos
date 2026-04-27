@@ -1,11 +1,15 @@
 function showDate({ date }) {
-    const formatLocalDate = new Intl.DateTimeFormat({
-        day: "2-digit",
-        weekday: "short",
-        month: "2-digit",
+    const options = {
         year: "numeric",
-    })
-    return formatLocalDate.format(date);
+        month: "2-digit",
+        weekday: "short",
+        day: "2-digit",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+    };
+
+    return new Intl.DateTimeFormat("es-Mx", options).format(date);
 }
 
 module.exports = {

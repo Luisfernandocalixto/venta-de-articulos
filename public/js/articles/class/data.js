@@ -4,15 +4,15 @@ class IsData {
     }
 
     static getPages() {
-        let isValue = 1
+        let isValue = 1;
         return isValue;
     }
     static getGroup() {
-        let isValue = 1
+        let isValue = 1;
         return isValue;
     }
     static getGrade() {
-        let isValue = 1
+        let isValue = 1;
         return isValue;
     }
     static getGeneration() {

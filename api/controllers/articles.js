@@ -1,5 +1,6 @@
 const { ITEMS_PER_PAGE } = require('../constants/articles.js');
 const Image = require('../models/Image.js');
+const { showDate } = require('../utils/utils.js');
 
 
 class ArticleController {
@@ -20,11 +21,22 @@ class ArticleController {
         }
     }
 
+    static async deleteArticle(req, res) {
+        try {
+
+            await Image.findByIdAndDelete({ _id: req.params.id });
+
+            res.status(200).json('Article delete successfully!');
+        } catch (error) {
+            res.status(500).json("Error delete article");
+        }
+    }
+
     static async articles(req, res) {
         try {
             const currentSession = req.session;
             const { name } = currentSession.user;
-            res.render('./components/articleHome.hbs', { present: name })
+            res.render('./components/articleHome.hbs', { present: name });
         } catch (error) {
             res.status(500).json("Error show page principal");
         }
@@ -47,15 +59,16 @@ class ArticleController {
                     user: a.user,
                     imageUrl: a.imageUrl,
                     description: a.description,
-                    createdAt: new Date(a.createdAt).toLocaleString('es-MX',{ day:'2-digit', weekday: 'short', month: 'short', year: 'numeric'})
+                    createdAt: showDate({date :a.createdAt})
+                    // createdAt: new Date(a.createdAt).toLocaleString('es-MX',{ day:'2-digit', weekday: 'short', month: 'short', year: 'numeric'})
                 }
             });
 
             const  queryPages = await Image.find().countDocuments();
-            const totalPages = Math.ceil(Number(queryPages) / ITEMS_PER_PAGE)
+            const totalPages = Math.ceil(Number(queryPages) / ITEMS_PER_PAGE);
             
             
-         res.status(200).json({articles, totalPages})
+         res.status(200).json({articles, totalPages});
         } catch (error) {
             res.status(500).json("Error show articles");
         }
@@ -80,15 +93,16 @@ class ArticleController {
                     user: a.user,
                     imageUrl: a.imageUrl,
                     description: a.description,
-                    createdAt: new Date(a.createdAt).toLocaleString('es-MX',{ day:'2-digit', weekday: 'short', month: 'short', year: 'numeric'})
+                    createdAt: showDate({ date: a.createdAt})
+                    // createdAt: new Date(a.createdAt).toLocaleString('es-MX',{ day:'2-digit', weekday: 'short', month: 'short', year: 'numeric'})
                 }
             });
 
             const  queryPages = await Image.find({ user: id }).countDocuments();
-            const totalPages = Math.ceil(Number(queryPages) / ITEMS_PER_PAGE)
+            const totalPages = Math.ceil(Number(queryPages) / ITEMS_PER_PAGE);
             
             
-         res.status(200).json({articles, totalPages})
+         res.status(200).json({articles, totalPages});
         } catch (error) {
             res.status(500).json("Error show articles");
         }

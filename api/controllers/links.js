@@ -1,5 +1,5 @@
 const { ITEMS_PER_PAGE } = require("../constants/links.js");
-const Image = require("../models/Image");
+const Image = require("../models/Image.js");
 class LinksController {
 
     static async index(req, res) {
@@ -17,7 +17,7 @@ class LinksController {
                 }
             });
 
-            res.render('./components/home.hbs', { articles })
+            res.render('./components/home.hbs', { articles });
         } catch (error) {                        
             res.status(500).json("Error show page principal");
         }

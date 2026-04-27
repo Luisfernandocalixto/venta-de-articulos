@@ -29,7 +29,7 @@ class UserRepository {
         const user = await User.findOne({ email: email });
         if (!user) throw new Error("username does not exist!");
 
-        const verifyPassword = await bcrypt.compare(password.trim(), user.password)
+        const verifyPassword = await bcrypt.compare(password.trim(), user.password);
         if (!verifyPassword) throw new Error("password is incorrect!");
 
         const publicUser = {
@@ -39,7 +39,7 @@ class UserRepository {
             date: user.date
         }
 
-        return publicUser
+        return publicUser;
     }
 
 
@@ -55,10 +55,10 @@ const user = z.object({
     confirm_password: z.string({ message: 'Confirm password  invalid!' }).trim({}).min(1, { message: 'Confirm password empty!' }),
     token: z.string({ message: 'Token  invalid!' }).trim({}).min(1, { message: 'Token empty!' }),
 
-})
+});
 
 function validatePartialDataOfUser(input) {
-    return user.partial().safeParse(input)
+    return user.partial().safeParse(input);
 }
 
 module.exports = {

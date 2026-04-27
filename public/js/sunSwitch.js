@@ -11,4 +11,4 @@ const sun = `
 
 
 
-export default sun
+export default sun;
